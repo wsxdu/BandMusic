@@ -19,8 +19,7 @@
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-
+  img{display:block}
   .wrap{width:min(1120px,92%);margin:0 auto}
 
   /* ===== Nav ===== */
@@ -31,13 +30,13 @@
   .brand b{color:var(--accent-2)}
   .nav-links{display:flex;gap:26px;color:var(--muted);font-size:15px}
   .nav-links a:hover{color:#fff}
-  .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));border:none;color:#fff;padding:9px 20px;border-radius:24px;font-weight:700;font-size:14px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+  .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));border:none;color:#fff;padding:9px 20px;border-radius:24px;font-weight:700;font-size:14px;cursor:pointer;transition:.15s}
   .cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(194,12,12,.4)}
   @media(max-width:720px){.nav-links{display:none}}
 
   /* ===== Hero ===== */
-  header{position:relative;padding:150px 0 90px;background:radial-gradient(1200px 600px at 75% -10%,rgba(194,12,12,.28),transparent 60%),radial-gradient(900px 500px at 10% 10%,rgba(255,77,77,.10),transparent 55%),var(--bg)}
-  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  header{position:relative;padding:140px 0 90px;background:radial-gradient(900px 500px at 80% -5%,rgba(194,12,12,.30),transparent 60%),radial-gradient(700px 400px at 8% 20%,rgba(255,77,77,.10),transparent 55%),var(--bg)}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
   .hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.12;letter-spacing:.5px}
   .hero h1 .red{background:linear-gradient(90deg,var(--accent-2),#ff8b6b);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero p.sub{margin:22px 0 34px;color:var(--muted);font-size:clamp(15px,2vw,18px);max-width:520px}
@@ -50,9 +49,25 @@
   .stats{display:flex;gap:34px;margin-top:44px}
   .stats div b{font-size:26px;display:block;color:#fff}
   .stats div span{font-size:13px;color:var(--muted)}
-  .hero-art{border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);border:1px solid var(--line);position:relative;aspect-ratio:4/4.6}
-  .hero-art img{width:100%;height:100%;object-fit:cover}
-  @media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{max-width:340px;margin:0 auto}}
+
+  /* phone mockup (CSS) */
+  .phone{width:290px;margin:0 auto;border-radius:30px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,#1a1a22,#121216);padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .phone .screen{border-radius:22px;background:#0e0e13;overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+  .p-head{display:flex;align-items:center;gap:8px;padding:14px 16px 8px}
+  .p-head img{width:28px;height:28px;border-radius:8px}
+  .p-head span{font-size:14px;font-weight:700}
+  .p-head b{color:var(--accent-2)}
+  .p-art{display:flex;justify-content:center;align-items:center;height:170px;margin:8px 14px;border-radius:16px;background:radial-gradient(circle at 30% 30%,#2a2030,#13131a 70%);position:relative;overflow:hidden}
+  .p-art::after{content:"";position:absolute;width:70px;height:70px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent),#ff8b6b,#c20c0c);filter:blur(1px);opacity:.9}
+  .p-art::before{content:"♪";position:absolute;z-index:1;font-size:38px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .p-tit{text-align:center;padding:6px 0 2px;font-size:15px;font-weight:700}
+  .p-sub{text-align:center;color:var(--muted);font-size:12px;margin-bottom:8px}
+  .p-prog{height:4px;background:rgba(255,255,255,.12);margin:0 18px 14px;border-radius:2px;overflow:hidden}
+  .p-prog i{display:block;width:55%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .p-ctrl{display:flex;justify-content:center;gap:26px;padding-bottom:16px;color:#ddd}
+  .p-ctrl span{font-size:16px}
+  .p-ctrl .big{font-size:26px;color:var(--accent-2)}
+  @media(max-width:820px){.hero{grid-template-columns:1fr}.phone{margin-top:10px}}
 
   /* ===== Section base ===== */
   section{padding:80px 0}
@@ -61,7 +76,7 @@
   .sec-head h2{font-size:clamp(26px,4vw,38px);font-weight:900}
   .sec-head p{color:var(--muted);margin-top:12px;font-size:15px;max-width:600px;margin-left:auto;margin-right:auto}
 
-  /* ===== Feature cards ===== */
+  /* ===== Features ===== */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .card{background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .18s,border-color .18s}
   .card:hover{transform:translateY(-5px);border-color:rgba(194,12,12,.45)}
@@ -71,16 +86,17 @@
   @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
   @media(max-width:600px){.grid{grid-template-columns:1fr}}
 
-  /* ===== Showcase ===== */
-  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .shot{border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:9/16;position:relative}
-  .shot img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-  .shot:hover img{transform:scale(1.05)}
-  .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:13px}
-  @media(max-width:900px){.shots{grid-template-columns:1fr;max-width:300px;margin:0 auto}}
+  /* ===== Showcase (CSS cards) ===== */
+  .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .shot{border-radius:18px;border:1px solid var(--line);overflow:hidden;background:var(--card);transition:transform .18s,border-color .18s;margin:0}
+  .shot:hover{transform:translateY(-5px);border-color:rgba(194,12,12,.45)}
+  .shot img{width:100%;display:block;aspect-ratio:9/19;object-fit:cover;object-position:top}
+  .shot figcaption{padding:10px 12px;font-size:13px;color:var(--text);background:linear-gradient(180deg,var(--bg-2),var(--card));text-align:center}
+  @media(max-width:860px){.shots{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.shots{grid-template-columns:1fr;max-width:320px;margin:0 auto}}
 
   /* ===== CTA band ===== */
-  .band{background:linear-gradient(135deg,var(--accent),#7d0707);border-radius:26px;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+  .band{background:linear-gradient(135deg,var(--accent),#7d0707);border-radius:26px;padding:56px 32px;text-align:center;position:relative;overflow:hidden}
   .band h2{font-size:clamp(26px,4vw,40px);font-weight:900}
   .band p{color:rgba(255,255,255,.85);margin:14px auto 28px;max-width:520px}
   .band .btn-primary{background:#fff;color:var(--accent);box-shadow:0 10px 26px rgba(0,0,0,.3)}
@@ -121,8 +137,21 @@
         <div><b>秒速</b><span>在线播放</span></div>
       </div>
     </div>
-    <div class="hero-art">
-      <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=bandmusic%20mobile%20music%20player%20app%20screen%20mockup%2C%20dark%20black%20%23101014%20background%2C%20vivid%20red%20%23c20c0c%20accent%20color%2C%20clean%20modern%20music%20app%20UI%2C%20song%20list%20and%20now%20playing%20screen%2C%20premium%20product%20shot&image_size=portrait_4_3" alt="手环音乐 App 界面">
+    <div class="phone">
+      <div class="screen">
+        <div class="p-head">
+          <img src="logo.png" alt=""><span><b>手环</b>音乐</span>
+        </div>
+        <div class="p-art"></div>
+        <div class="p-tit">DREAM FUNK</div>
+        <div class="p-sub">Lumix · Kxrsed</div>
+        <div class="p-prog"><i></i></div>
+        <div class="p-ctrl">
+          <span>⏮</span>
+          <span class="big">▶</span>
+          <span>⏭</span>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -150,21 +179,13 @@
     <div class="sec-head">
       <span class="tag">SCREENSHOTS</span>
       <h2>界面预览</h2>
-      <p>简洁清爽的三屏核心体验：歌曲 · 歌单 · 播放。</p>
+      <p>简洁清爽的核心界面一览：歌曲 · 歌单 · 搜索。</p>
     </div>
     <div class="shots">
-      <div class="shot">
-        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20music%20app%20song%20list%20screen%2C%20dark%20theme%20red%20accent%2C%20album%20cover%20thumbnails%2C%20playlist%20UI&image_size=portrait_16_9" alt="歌曲列表">
-        <div class="cap">🎧 歌曲列表</div>
-      </div>
-      <div class="shot">
-        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20music%20app%20playlist%20grid%20screen%2C%20dark%20UI%20red%20accent%2C%20playlist%20covers%20collection&image_size=portrait_16_9" alt="歌单">
-        <div class="cap">📁 歌单收藏</div>
-      </div>
-      <div class="shot">
-        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20music%20player%20now%20playing%20screen%2C%20dark%20background%20red%20glow%2C%20large%20album%20art%20with%20lyrics%20scroll%2C%20modern%20UI&image_size=portrait_16_9" alt="正在播放">
-        <div class="cap">💬 正在播放</div>
-      </div>
+      <figure class="shot"><img src="shots/shot1.jpg" alt="主界面 · 歌曲"><figcaption>主界面 · 歌曲</figcaption></figure>
+      <figure class="shot"><img src="shots/shot2.jpg" alt="歌单搜索"><figcaption>歌单搜索</figcaption></figure>
+      <figure class="shot"><img src="shots/shot3.jpg" alt="歌单结果"><figcaption>歌单结果</figcaption></figure>
+      <figure class="shot"><img src="shots/shot4.jpg" alt="歌曲列表"><figcaption>歌曲列表</figcaption></figure>
     </div>
   </div>
 </section>
