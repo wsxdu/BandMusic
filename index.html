@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手环音乐 · BandMusic — 随身好音乐</title>
+<style>
+  :root{
+    --bg:#101014;
+    --bg-2:#16161c;
+    --card:#1c1c24;
+    --accent:#c20c0c;
+    --accent-2:#ff4d4d;
+    --text:#f4f2ff;
+    --muted:#9a9aa8;
+    --line:rgba(255,255,255,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  .wrap{width:min(1120px,92%);margin:0 auto}
+
+  /* ===== Nav ===== */
+  nav{position:fixed;inset:0 0 auto;z-index:100;backdrop-filter:blur(14px);background:rgba(16,16,20,.78);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.5px}
+  .brand img{width:34px;height:34px;border-radius:9px}
+  .brand b{color:var(--accent-2)}
+  .nav-links{display:flex;gap:26px;color:var(--muted);font-size:15px}
+  .nav-links a:hover{color:#fff}
+  .cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));border:none;color:#fff;padding:9px 20px;border-radius:24px;font-weight:700;font-size:14px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(194,12,12,.4)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* ===== Hero ===== */
+  header{position:relative;padding:150px 0 90px;background:radial-gradient(1200px 600px at 75% -10%,rgba(194,12,12,.28),transparent 60%),radial-gradient(900px 500px at 10% 10%,rgba(255,77,77,.10),transparent 55%),var(--bg)}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  .hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.12;letter-spacing:.5px}
+  .hero h1 .red{background:linear-gradient(90deg,var(--accent-2),#ff8b6b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{margin:22px 0 34px;color:var(--muted);font-size:clamp(15px,2vw,18px);max-width:520px}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{padding:13px 26px;border-radius:30px;font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 10px 26px rgba(194,12,12,.35)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.3)}
+  .stats{display:flex;gap:34px;margin-top:44px}
+  .stats div b{font-size:26px;display:block;color:#fff}
+  .stats div span{font-size:13px;color:var(--muted)}
+  .hero-art{border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);border:1px solid var(--line);position:relative;aspect-ratio:4/4.6}
+  .hero-art img{width:100%;height:100%;object-fit:cover}
+  @media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{max-width:340px;margin:0 auto}}
+
+  /* ===== Section base ===== */
+  section{padding:80px 0}
+  .sec-head{text-align:center;margin-bottom:52px}
+  .sec-head .tag{display:inline-block;font-size:13px;letter-spacing:2px;color:var(--accent-2);background:rgba(194,12,12,.1);border:1px solid rgba(194,12,12,.25);padding:5px 14px;border-radius:20px;margin-bottom:16px}
+  .sec-head h2{font-size:clamp(26px,4vw,38px);font-weight:900}
+  .sec-head p{color:var(--muted);margin-top:12px;font-size:15px;max-width:600px;margin-left:auto;margin-right:auto}
+
+  /* ===== Feature cards ===== */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .18s,border-color .18s}
+  .card:hover{transform:translateY(-5px);border-color:rgba(194,12,12,.45)}
+  .card .ico{font-size:30px;margin-bottom:16px}
+  .card h3{font-size:18px;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:14px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+
+  /* ===== Showcase ===== */
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .shot{border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:9/16;position:relative}
+  .shot img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .shot:hover img{transform:scale(1.05)}
+  .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:13px}
+  @media(max-width:900px){.shots{grid-template-columns:1fr;max-width:300px;margin:0 auto}}
+
+  /* ===== CTA band ===== */
+  .band{background:linear-gradient(135deg,var(--accent),#7d0707);border-radius:26px;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+  .band h2{font-size:clamp(26px,4vw,40px);font-weight:900}
+  .band p{color:rgba(255,255,255,.85);margin:14px auto 28px;max-width:520px}
+  .band .btn-primary{background:#fff;color:var(--accent);box-shadow:0 10px 26px rgba(0,0,0,.3)}
+  .band .btn-primary:hover{transform:translateY(-2px)}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot .brand img{width:26px;height:26px;border-radius:7px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand"><img src="logo.png" alt="手环音乐">手环<b>音乐</b></div>
+    <div class="nav-links">
+      <a href="#features">功能特性</a>
+      <a href="#showcase">界面预览</a>
+      <a href="#download">下载</a>
+    </div>
+    <button class="cta" onclick="location.href='#download'">立即下载</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <h1>你的随身音乐，<br><span class="red">戴上耳机即沉浸</span></h1>
+      <p class="sub">手环音乐（BandMusic）是一款轻量、简洁的网易云音乐客户端。海量曲库、歌单收藏、实时歌词、一键分享，把好音乐装进你的口袋。</p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#download">⬇ 下载 App</a>
+        <a class="btn btn-ghost" href="#features">了解功能 →</a>
+      </div>
+      <div class="stats">
+        <div><b>海量</b><span>曲库资源</span></div>
+        <div><b>轻量</b><span>清爽体验</span></div>
+        <div><b>秒速</b><span>在线播放</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=bandmusic%20mobile%20music%20player%20app%20screen%20mockup%2C%20dark%20black%20%23101014%20background%2C%20vivid%20red%20%23c20c0c%20accent%20color%2C%20clean%20modern%20music%20app%20UI%2C%20song%20list%20and%20now%20playing%20screen%2C%20premium%20product%20shot&image_size=portrait_4_3" alt="手环音乐 App 界面">
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">FEATURES</span>
+      <h2>功能特性</h2>
+      <p>把最好的音乐体验，浓缩在一款轻快又精致的小应用里。</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="ico">🎵</div><h3>海量曲库</h3><p>接入网易云音源，热门榜单、新歌速递、经典老歌一网打尽，在线即点即播。</p></div>
+      <div class="card"><div class="ico">📁</div><h3>歌单管理</h3><p>搜索并收藏优质歌单，按心情、场景整理专属音乐收藏夹。</p></div>
+      <div class="card"><div class="ico">💬</div><h3>实时歌词</h3><p>播放页跟随进度滚动歌词，还能查看完整歌词，卡拉 OK 般沉浸体验。</p></div>
+      <div class="card"><div class="ico">📤</div><h3>一键分享</h3><p>把正在听的歌以卡片形式分享到 QQ、微信，安利给身边的朋友。</p></div>
+      <div class="card"><div class="ico">⚡</div><h3>轻量极速</h3><p>安装包小、启动快、内存占用低，老设备也能流畅运行。</p></div>
+      <div class="card"><div class="ico">🌙</div><h3>沉浸深色</h3><p>暗色界面配合品牌红点缀，夜间听歌更护眼、更有氛围感。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="showcase" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">SCREENSHOTS</span>
+      <h2>界面预览</h2>
+      <p>简洁清爽的三屏核心体验：歌曲 · 歌单 · 播放。</p>
+    </div>
+    <div class="shots">
+      <div class="shot">
+        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20music%20app%20song%20list%20screen%2C%20dark%20theme%20red%20accent%2C%20album%20cover%20thumbnails%2C%20playlist%20UI&image_size=portrait_16_9" alt="歌曲列表">
+        <div class="cap">🎧 歌曲列表</div>
+      </div>
+      <div class="shot">
+        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20music%20app%20playlist%20grid%20screen%2C%20dark%20UI%20red%20accent%2C%20playlist%20covers%20collection&image_size=portrait_16_9" alt="歌单">
+        <div class="cap">📁 歌单收藏</div>
+      </div>
+      <div class="shot">
+        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20music%20player%20now%20playing%20screen%2C%20dark%20background%20red%20glow%2C%20large%20album%20art%20with%20lyrics%20scroll%2C%20modern%20UI&image_size=portrait_16_9" alt="正在播放">
+        <div class="cap">💬 正在播放</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="band">
+      <h2>现在就下载，把好音乐戴在手腕上</h2>
+      <p>手环音乐 · BandMusic —— 轻量、自由、好听。选择你的版本，开始播放。</p>
+      <a class="btn btn-primary" href="bandmusic.html">⬇ 下载 Android 版 APK</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand" style="color:var(--muted)"><img src="logo.png" alt=""><span>手环音乐 · BandMusic</span></div>
+    <div>仅供学习与个人使用 · 音乐版权归原作者及平台所有</div>
+  </div>
+</footer>
+
+</body>
+</html>
